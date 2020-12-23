@@ -15,21 +15,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 // コントローラクラスに付与するもの。Springのコンポーネントと認識され
 // ApplicationContextに登録されてDI対象のクラスとなる
 @Controller
 public class ProductsController {
+    @Autowired
+    private ProductsService prodService;
+
+    @ModelAttribute("form")
+    public ProductForm setUpForm() {
+        return new ProductForm();
+    }
+
+    @GetMapping("/products")
+    public String getProducts() {
+        return "products";
+    }
 
     @Autowired
     private CustomerService custService;
-
-    @GetMapping("/products")
-    public String getProducts(Model model) {
-        model.addAttribute("form", new ProductForm());
-        return "products";
-    }
 
     @GetMapping("/products/show")
     public String showCustomer(Model model) {
@@ -41,13 +46,9 @@ public class ProductsController {
 
         // set result
         model.addAttribute("list", dto.getList());
-        model.addAttribute("form", new ProductForm());
 
         return "products";
     }
-
-    @Autowired
-    private ProductsService prodService;
 
     @PostMapping("/products/showOne")
     public String showOne(@ModelAttribute ProductForm prodForm, BindingResult bindingResult, Model model) {
@@ -57,7 +58,6 @@ public class ProductsController {
         }
 
         ResultDTO<Product> dto = prodService.showOne(prodForm);
-        model.addAttribute("form", prodForm);
         model.addAttribute("result", dto.getList());
 
         return "products";

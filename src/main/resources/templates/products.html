@@ -11,15 +11,30 @@
 <body>
     <div layout:fragment="content">
         <form action="#" th:action="@{/products/showOne}" th:object="${form}" method="POST">
-            ProductID :
-                <input type="number" th:field="*{id}"><br>
-            Name :
-                <input type="text" th:field="*{name}"><br>
-            SalePrice :
-                <input type="number" th:field="*{salePrice}"><br>
-            maker :
-                <input type="text" th:field="*{maker}"><br>
-            <input type="submit" value="検索">
+            <table width="300">
+            <tr>
+                <td><label for="id">ProductID : </label></td>
+                <td><input type="number" th:field="*{id}"></td>
+            </tr>
+            <tr>
+                <td><label>Name : </label></td>
+                <td><input type="text" th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <td><label>SalePrice : </label></td>
+                <td><input type="number" th:field="*{salePrice}"></td>
+            </tr>
+            <tr>
+                <td><label>maker : </label></td>
+                <td><input type="text" th:field="*{maker}"></td>
+            </tr>
+            </table><br>
+            <table width="300"><tr>
+            <td><input type="submit" value="検索"></td>
+            <td><input type="submit" value="追加"></td>
+            <td><input type="submit" value="変更"></td>
+            <td><input type="submit" value="削除"></td>
+            </tr></table>
         </form>
         <a href="/products/show"><button type="submit">ShowAllCustomer</button></a>
 

@@ -11,8 +11,8 @@
 <body>
     <div layout:fragment="content">
         <form action = "#" th:action="@{/login}" th:object="${getInfo}" method="POST">
-            <p>NAME : <input type="text" th:field="*{name}" value="${getInfo.name}"></p><br>
-            <p>PASS : <input type="text" th:field="*{pass}" value="${getInfo.pass}"></p><br>
+            <p>NAME : <input type="text" th:field="*{name}" tx:value="*{name}"></p>
+            <p>PASS : <input type="text" th:field="*{pass}" tx:value="*{pass}"></p>
             <input type="submit" value="POST">
         </form>
         <a href="/products">一覧ページ</a>
