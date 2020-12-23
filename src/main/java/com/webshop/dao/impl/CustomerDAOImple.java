@@ -1,8 +1,6 @@
 package com.webshop.dao.impl;
 
-// import java.util.ArrayList;
 import java.util.List;
-// import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -32,7 +30,7 @@ public class CustomerDAOImple implements CustomerDAO {
     }
 
     @Override
-    public List<Customer> getAll() {
+    public List<Customer> selectAll() {
         // 他にRowMapperとMapを使った取得方法があるが、使えるなら以下が一番楽
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
         List<Customer> customerList = jdbcTemplate.query("SELECT * FROM customers", rowMapper);

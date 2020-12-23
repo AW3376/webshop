@@ -16,7 +16,6 @@ public class ViewController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        model.addAttribute("msg", "Hello");
         return "index";
     }
 

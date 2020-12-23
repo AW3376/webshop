@@ -30,21 +30,11 @@ public class CustomerServiceImpl implements CustomerService {
 		// SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 
-    public ResultDTO<Customer> execute(Customer cust) {
+    public ResultDTO<Customer> selectAll() {
         ResultDTO<Customer> rs = new ResultDTO<>();
 
-        // // INSERT
-		// dao.insertOne(model);
-
-		// // UPDATE
-		// model.setName("廃止");
-		// dao.updateOne(model);
-
-		// // DELETE
-		// dao.deleteOneById(model.getId());
-
 		// SELECT 複数
-		List<Customer> list = dao.getAll();
+		List<Customer> list = dao.selectAll();
 		rs.setList(list);
 
 		return rs;

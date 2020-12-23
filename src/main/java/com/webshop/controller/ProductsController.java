@@ -1,11 +1,8 @@
 package com.webshop.controller;
 
 import com.webshop.dto.ResultDTO;
-import com.webshop.entity.Customer;
 import com.webshop.entity.Product;
-import com.webshop.entity.UserInfo;
 import com.webshop.form.ProductForm;
-import com.webshop.service.CustomerService;
 import com.webshop.service.ProductsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +27,6 @@ public class ProductsController {
 
     @GetMapping("/products")
     public String getProducts() {
-        return "products";
-    }
-
-    @Autowired
-    private CustomerService custService;
-
-    @GetMapping("/products/show")
-    public String showCustomer(Model model) {
-
-        Customer cust = new Customer();
-
-        // execute service
-        ResultDTO<Customer> dto = custService.execute(cust);
-
-        // set result
-        model.addAttribute("list", dto.getList());
-
         return "products";
     }
 

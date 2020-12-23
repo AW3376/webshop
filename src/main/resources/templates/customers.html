@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+    lang="ja"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout}">
+
+<head>
+    <title>Customers</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form action="#" th:action="@{/customers/execute}" th:object="${form}" method="POST">
+    <table width="300">
+    <tr>
+        <td><label for="number">Number : </label></td>
+        <td><input type="number" th:field="*{number}"></td>
+    </tr>
+    <tr>
+        <td><label for="id">ID : </label></td>
+        <td><input type="text" th:field="*{id}"></td>
+    </tr>
+    <tr>
+        <td><label for="password">Password : </label></td>
+        <td><input type="text" th:field="*{password}"></td>
+    </tr>
+    <tr>
+        <td><label for="name">Name : </label></td>
+        <td><input type="text" th:field="*{name}"></td>
+    </tr>
+    <tr>
+        <td><label for="prefecture">Prefecture : </label></td>
+        <td><input type="text" th:field="*{prefecture}"></td>
+    </tr>
+    <tr>
+        <td><label for="city">City : </label></td>
+        <td><input type="text" th:field="*{city}"></td>
+    </tr>
+    <tr>
+        <td><label for="phone">Phone : </label></td>
+        <td><input type="text" th:field="*{phone}"></td>
+    </tr>
+    </table><br>
+    <table width="300"><tr>
+        <td><input type="submit" name="showAllCustomer" value="全件表示"></td>
+        <td><input type="submit" name="searchCutomer" value="検索"></td>
+        <td><input type="submit" name="addCustomer" value="追加"></td>
+        <td><input type="submit" name="editCustomer" value="変更"></td>
+        <td><input type="submit" name="deleteCustomer" value="削除"></td>
+    </tr></table>
+    </form>
+
+    <table style="margin: 2em" border="1">
+    <tr>
+        <th style="width: 80px; background-color: #CCC;">Number</th>
+        <th style="width: 80px; background-color: #CCC;">ID</th>
+        <th style="width: 80px; background-color: #CCC;">Password</th>
+        <th style="width: 80px; background-color: #CCC;">name</th>
+        <th style="width: 80px; background-color: #CCC;">Prefecture</th>
+        <th style="width: 80px; background-color: #CCC;">city</th>
+        <th style="width: 80px; background-color: #CCC;">phone</th>
+    </tr>
+    <tr th:if="${list}!=null" th:each="cust : ${list}">
+        <td th:text="${cust.number}"></td>
+        <td th:text="${cust.id}"></td>
+        <td th:text="${cust.password}"></td>
+        <td th:text="${cust.name}"></td>
+        <td th:text="${cust.prefecture}"></td>
+        <td th:text="${cust.city}"></td>
+        <td th:text="${cust.phone}"></td>
+    </tr>
+    </table>
+</div>
+</body>
+</html>

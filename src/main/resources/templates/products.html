@@ -9,74 +9,52 @@
     <title>Products</title>
 </head>
 <body>
-    <div layout:fragment="content">
-        <form action="#" th:action="@{/products/showOne}" th:object="${form}" method="POST">
-            <table width="300">
-            <tr>
-                <td><label for="id">ProductID : </label></td>
-                <td><input type="number" th:field="*{id}"></td>
-            </tr>
-            <tr>
-                <td><label>Name : </label></td>
-                <td><input type="text" th:field="*{name}"></td>
-            </tr>
-            <tr>
-                <td><label>SalePrice : </label></td>
-                <td><input type="number" th:field="*{salePrice}"></td>
-            </tr>
-            <tr>
-                <td><label>maker : </label></td>
-                <td><input type="text" th:field="*{maker}"></td>
-            </tr>
-            </table><br>
-            <table width="300"><tr>
-            <td><input type="submit" value="検索"></td>
-            <td><input type="submit" value="追加"></td>
-            <td><input type="submit" value="変更"></td>
-            <td><input type="submit" value="削除"></td>
-            </tr></table>
-        </form>
-        <a href="/products/show"><button type="submit">ShowAllCustomer</button></a>
-
-        <table style="margin: 2em" border="1">
+<div layout:fragment="content">
+    <form action="#" th:action="@{/products/showOne}" th:object="${form}" method="POST">
+        <table width="300">
         <tr>
-            <th style="width: 80px; background-color: #CCC;">ProductID</th>
-            <th style="width: 80px; background-color: #CCC;">Name</th>
-            <th style="width: 80px; background-color: #CCC;">SalePrice</th>
-            <th style="width: 80px; background-color: #CCC;">PurPrice</th>
-            <th style="width: 80px; background-color: #CCC;">Stock</th>
-            <th style="width: 80px; background-color: #CCC;">Maker</th>
+            <td><label for="id">ProductID : </label></td>
+            <td><input type="number" th:field="*{id}"></td>
         </tr>
-        <tr th:each="prod : ${result}">
-            <td th:text="${prod.id}"></td>
-            <td th:text="${prod.name}"></td>
-            <td th:text="${prod.salePrice}"></td>
-            <td th:text="${prod.purchasePrice}"></td>
-            <td th:text="${prod.stock}"></td>
-            <td th:text="${prod.maker}"></td>
-        </tr>
-        </table>
-
-        <table style="margin: 2em" border="1">
         <tr>
-            <th style="width: 80px; background-color: #CCC;">Number</th>
-            <th style="width: 80px; background-color: #CCC;">ID</th>
-            <th style="width: 80px; background-color: #CCC;">Password</th>
-            <th style="width: 80px; background-color: #CCC;">name</th>
-            <th style="width: 80px; background-color: #CCC;">Prefecture</th>
-            <th style="width: 80px; background-color: #CCC;">city</th>
-            <th style="width: 80px; background-color: #CCC;">phone</th>
+            <td><label>Name : </label></td>
+            <td><input type="text" th:field="*{name}"></td>
         </tr>
-        <tr th:if="${list}!=null" th:each="cust : ${list}">
-            <td th:text="${cust.number}"></td>
-            <td th:text="${cust.id}"></td>
-            <td th:text="${cust.password}"></td>
-            <td th:text="${cust.name}"></td>
-            <td th:text="${cust.prefecture}"></td>
-            <td th:text="${cust.city}"></td>
-            <td th:text="${cust.phone}"></td>
+        <tr>
+            <td><label>SalePrice : </label></td>
+            <td><input type="number" th:field="*{salePrice}"></td>
         </tr>
-        </table>
-    </div>
+        <tr>
+            <td><label>maker : </label></td>
+            <td><input type="text" th:field="*{maker}"></td>
+        </tr>
+        </table><br>
+        <table width="300"><tr>
+        <td><input type="submit" value="検索"></td>
+        <td><input type="submit" value="追加"></td>
+        <td><input type="submit" value="変更"></td>
+        <td><input type="submit" value="削除"></td>
+        </tr></table>
+    </form>
+
+    <table style="margin: 2em" border="1">
+    <tr>
+        <th style="width: 80px; background-color: #CCC;">ProductID</th>
+        <th style="width: 80px; background-color: #CCC;">Name</th>
+        <th style="width: 80px; background-color: #CCC;">SalePrice</th>
+        <th style="width: 80px; background-color: #CCC;">PurPrice</th>
+        <th style="width: 80px; background-color: #CCC;">Stock</th>
+        <th style="width: 80px; background-color: #CCC;">Maker</th>
+    </tr>
+    <tr th:each="prod : ${result}">
+        <td th:text="${prod.id}"></td>
+        <td th:text="${prod.name}"></td>
+        <td th:text="${prod.salePrice}"></td>
+        <td th:text="${prod.purchasePrice}"></td>
+        <td th:text="${prod.stock}"></td>
+        <td th:text="${prod.maker}"></td>
+    </tr>
+    </table>
+</div>
 </body>
 </html>
