@@ -39,45 +39,4 @@ public class ViewController {
     public String postLogin(@ModelAttribute("getInfo") UserInfo ui) {
         return "redirect:/login";
     }
-
-    @Autowired
-    private CustomerService custService;
-
-    @GetMapping("/products")
-    public String getProducts(Model model) {
-        model.addAttribute("form", new ProductForm());
-        return "products";
-    }
-
-    @GetMapping("/products/show")
-    public String showCustomer(Model model) {
-
-        Customer cust = new Customer();
-
-        // execute service
-        ResultDTO<Customer> dto = custService.execute(cust);
-
-        // set result
-        model.addAttribute("list", dto.getList());
-        model.addAttribute("form", new ProductForm());
-
-        return "products";
-    }
-
-    @Autowired
-    private ProductsService prodService;
-
-    @PostMapping("/products/showOne")
-    public String showOne(@ModelAttribute ProductForm prodForm, BindingResult bindingResult, Model model) {
-        // TODO IDとPriceのNull空文字対策
-        if(bindingResult.hasErrors()) {
-            System.out.println(bindingResult.toString());
-        }
-
-        ResultDTO<Product> dto = prodService.showOne(prodForm);
-        model.addAttribute("form", prodForm);
-        model.addAttribute("result", dto.getList());
-
-        return "products";
-    }
 }
