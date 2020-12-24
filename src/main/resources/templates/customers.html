@@ -4,70 +4,77 @@
     xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layouts/layout}">
-
 <head>
     <title>Customers</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/customers.css}" />
+    <!-- local プレビュー用 -->
+    <!-- <link rel="stylesheet" media="all" href="../static/css/style.css" />
+    <link rel="stylesheet" media="all" href="../static/css/customers.css" /> -->
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" class="content">
+    <div>
     <form action="#" th:action="@{/customers/execute}" th:object="${form}" method="POST">
-    <table width="300">
+    <table id="formTable">
     <tr>
-        <td><label for="number">Number : </label></td>
-        <td><input type="number" th:field="*{number}"></td>
+        <th><label for="number">Number</label></th>
+        <td><p th:text="*{number}"></p></td>
     </tr>
     <tr>
-        <td><label for="id">ID : </label></td>
+        <th><label for="id">ID</label></th>
         <td><input type="text" th:field="*{id}"></td>
     </tr>
     <tr>
-        <td><label for="password">Password : </label></td>
+        <th><label for="password">Password</label></th>
         <td><input type="text" th:field="*{password}"></td>
     </tr>
     <tr>
-        <td><label for="name">Name : </label></td>
+        <th><label for="name">Name</label></th>
         <td><input type="text" th:field="*{name}"></td>
     </tr>
     <tr>
-        <td><label for="prefecture">Prefecture : </label></td>
+        <th><label for="prefecture">Prefecture</label></th>
         <td><input type="text" th:field="*{prefecture}"></td>
     </tr>
     <tr>
-        <td><label for="city">City : </label></td>
+        <th><label for="city">City</label></th>
         <td><input type="text" th:field="*{city}"></td>
     </tr>
     <tr>
-        <td><label for="phone">Phone : </label></td>
+        <th><label for="phone">Phone</label></th>
         <td><input type="text" th:field="*{phone}"></td>
     </tr>
     </table><br>
-    <table width="300"><tr>
-        <td><input type="submit" name="showAllCustomer" value="全件表示"></td>
-        <td><input type="submit" name="searchCutomer" value="検索"></td>
-        <td><input type="submit" name="addCustomer" value="追加"></td>
-        <td><input type="submit" name="editCustomer" value="変更"></td>
-        <td><input type="submit" name="deleteCustomer" value="削除"></td>
-    </tr></table>
+    <table id="buttonTable"><tr>
+        <th><input type="submit" name="showAllCustomer" value="全件表示"></th>
+        <th><input type="submit" name="searchCutomer" value="検索"></th>
+        <th><input type="submit" name="addCustomer" value="追加"></th>
+        <th><input type="submit" name="editCustomer" value="変更実行"></th>    </tr></table>
     </form>
+    </div>
 
-    <table style="margin: 2em" border="1">
+    <table id="listTable">
     <tr>
-        <th style="width: 80px; background-color: #CCC;">Number</th>
-        <th style="width: 80px; background-color: #CCC;">ID</th>
-        <th style="width: 80px; background-color: #CCC;">Password</th>
-        <th style="width: 80px; background-color: #CCC;">name</th>
-        <th style="width: 80px; background-color: #CCC;">Prefecture</th>
-        <th style="width: 80px; background-color: #CCC;">city</th>
-        <th style="width: 80px; background-color: #CCC;">phone</th>
+        <th>Number</th>
+        <th>ID</th>
+        <th>Password</th>
+        <th>name</th>
+        <th>Prefecture</th>
+        <th>city</th>
+        <th>phone</th>
+        <th></th>
+        <th></th>
     </tr>
     <tr th:if="${list}!=null" th:each="cust : ${list}">
-        <td th:text="${cust.number}"></td>
-        <td th:text="${cust.id}"></td>
-        <td th:text="${cust.password}"></td>
-        <td th:text="${cust.name}"></td>
-        <td th:text="${cust.prefecture}"></td>
-        <td th:text="${cust.city}"></td>
-        <td th:text="${cust.phone}"></td>
+        <td><p th:text="${cust.number}"></p></td>
+        <td><p th:text="${cust.id}"></p></td>
+        <td><p th:text="${cust.password}"></p></td>
+        <td><p th:text="${cust.name}"></p></td>
+        <td><p th:text="${cust.prefecture}"></p></td>
+        <td><p th:text="${cust.city}"></p></td>
+        <td><p th:text="${cust.phone}"></p></td>
+        <td class="buttonTd"><input type="submit" name="editCustomer" value="変更"></td>
+        <td class="buttonTd"><input type="submit" name="deleteCustomer" value="削除"></td>
     </tr>
     </table>
 </div>
