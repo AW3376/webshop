@@ -1,5 +1,6 @@
 package com.webshop.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 // import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.util.StringUtils;
 
@@ -63,9 +65,67 @@ public class CustomerDAOImple implements CustomerDAO {
     }
 
     @Override
-    public Customer selectCustomers(String id) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Customer> selectCustomers(Customer cust) {
+        List<Customer> customerList = new ArrayList<>();
+        //SQL作成
+        StringBuilder sql = new StringBuilder();
+        String sqlBase = "SELECT * FROM customers WHERE ";
+        sql.append(sqlBase);
+
+        // id
+        if (StringUtils.hasText(cust.getId())) {
+            sql.append("id LIKE " + "\"%" + cust.getId() + "%\"");
+        }
+        // password
+        if (StringUtils.hasText(cust.getPassword())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(" AND ");
+            }
+            sql.append("password LIKE " + "\"%" + cust.getPassword() + "%\"");
+        }
+        // name
+        if (StringUtils.hasText(cust.getName())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(" AND ");
+            }
+            sql.append("name LIKE " + "\"%" + cust.getName() + "%\"");
+        }
+        // prefecture
+        if (StringUtils.hasText(cust.getPrefecture())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(" AND ");
+            }
+            sql.append("prefecture LIKE " + "\"%" + cust.getPrefecture() + "%\"");
+        }
+        // city
+        if (StringUtils.hasText(cust.getCity())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(" AND ");
+            }
+            sql.append("city LIKE " + "\"%" + cust.getCity() + "%\"");
+        }
+        // phone
+        if (StringUtils.hasText(cust.getPhone())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(" AND ");
+            }
+            sql.append("phone LIKE " + "\"%" + cust.getPhone() + "%\"");
+        }
+
+        // 検索情報がなければ空の結果を返す
+        if(sql.toString().equals(sqlBase)) {
+            customerList.add(new Customer());
+            return customerList;
+        }
+
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+        customerList = jdbcTemplate.query(sql.toString(), rowMapper);
+        if(CollectionUtils.isEmpty(customerList)) {
+            customerList.add(new Customer());
+            return customerList;
+        } else {
+            return customerList;
+        }
     }
 
     @Override
@@ -127,7 +187,6 @@ public class CustomerDAOImple implements CustomerDAO {
         result = jdbcTemplate.update(sql.toString());
         System.out.println("result = " + result);
     }
-
 
     @Override
     public void deleteCustomer(int num) {

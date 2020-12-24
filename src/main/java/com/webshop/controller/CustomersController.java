@@ -44,7 +44,13 @@ public class CustomersController {
     }
 
     @PostMapping(value = "execute", params = "searchCutomer")
-    public String searchCutomer(Model model) {
+    public String searchCutomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
+        // TODO err
+        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        // execute service
+        ResultDTO<Customer> dto = custService.selectCustomers(custForm);
+        model.addAttribute("list", dto.getList());
+
         return "customers";
     }
 

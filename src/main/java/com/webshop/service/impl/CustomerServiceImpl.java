@@ -42,8 +42,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     // SELECT
-    public ResultDTO<Customer> selectCutomers() {
+    public ResultDTO<Customer> selectCustomers(CustomerForm custForm) {
+        // formから検索用entityに変換
+        Customer cust = custForm.toEntity();
+        // READ
         ResultDTO<Customer> rs = new ResultDTO<>();
+        rs.setList(dao.selectCustomers(cust));
 
 		return rs;
     }

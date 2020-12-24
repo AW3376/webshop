@@ -7,7 +7,7 @@ import com.webshop.entity.Customer;
 public interface CustomerDAO {
     public List<Customer> selectAll();
     public void insertCustomer(Customer cust);
-    public Customer selectCustomers(String id);
+    public List<Customer> selectCustomers(Customer cust);
     public void updateCustomer(Customer cust);
     public void deleteCustomer(int num);
 }

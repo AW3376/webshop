@@ -67,7 +67,6 @@
         <th></th>
     </tr>
     <tr th:if="${list}!=null" th:each="cust, itr : ${list}">
-    <!-- <form action="#" th:action="@{/customers/execute}" th:object="${list[itr.index]}" method="POST" th:readonly="true"> -->
     <form action="#" th:action="@{/customers/execute}" th:object="${cust}" method="POST">
         <td><input type="text" name="number" th:value="${cust.number}" th:readonly="true"/></td>
         <td><input type="text" name="id" th:value="${cust.id}" th:readonly="true"/></td>
