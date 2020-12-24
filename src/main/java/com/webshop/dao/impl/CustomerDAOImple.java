@@ -124,9 +124,6 @@ public class CustomerDAOImple implements CustomerDAO {
 
         sql.append("where number = " + cust.getNumber());
 
-        System.out.println("sssssssssssssssssssssssssssssssssssssssss");
-        System.out.println(sql.toString());
-
         result = jdbcTemplate.update(sql.toString());
         System.out.println("result = " + result);
     }
