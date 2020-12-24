@@ -5,6 +5,7 @@ import java.util.List;
 import com.webshop.dao.CustomerDAO;
 import com.webshop.dto.ResultDTO;
 import com.webshop.entity.Customer;
+import com.webshop.form.CustomerForm;
 import com.webshop.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,53 +31,40 @@ public class CustomerServiceImpl implements CustomerService {
 		// SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 
+    // SELECT ALL DATA
     public ResultDTO<Customer> selectAll() {
         ResultDTO<Customer> rs = new ResultDTO<>();
 
-		// SELECT 複数
 		List<Customer> list = dao.selectAll();
 		rs.setList(list);
 
 		return rs;
     }
 
+    // SELECT
     public ResultDTO<Customer> selectCutomers() {
         ResultDTO<Customer> rs = new ResultDTO<>();
 
-		// SELECT 複数
 		List<Customer> list = dao.selectAll();
 		rs.setList(list);
 
 		return rs;
     }
 
-    public ResultDTO<Customer> insertOne() {
-        ResultDTO<Customer> rs = new ResultDTO<>();
+    // INSERT
+    public void insertCustomer(CustomerForm custForm) {
+        Customer customer = custForm.toEntity();
 
-		// SELECT 複数
-		List<Customer> list = dao.selectAll();
-		rs.setList(list);
-
-		return rs;
+		dao.insertCustomer(customer);
     }
 
-    public ResultDTO<Customer> updateOne() {
-        ResultDTO<Customer> rs = new ResultDTO<>();
-
-		// SELECT 複数
-		List<Customer> list = dao.selectAll();
-		rs.setList(list);
-
-		return rs;
+    // UPDATE
+    public void updateOne(CustomerForm custForm) {
+        // TODO
     }
 
-    public ResultDTO<Customer> deleteOne() {
-        ResultDTO<Customer> rs = new ResultDTO<>();
-
-		// SELECT 複数
-		List<Customer> list = dao.selectAll();
-		rs.setList(list);
-
-		return rs;
+    // DELETE
+    public void deleteCustomer(CustomerForm custForm) {
+	    dao.deleteCustomer(custForm.getNumber());
     }
 }

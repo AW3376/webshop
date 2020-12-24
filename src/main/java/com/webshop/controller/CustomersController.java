@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
 
 // コントローラクラスに付与するもの。Springのコンポーネントと認識され
 // ApplicationContextに登録されてDI対象のクラスとなる
@@ -44,17 +45,17 @@ public class CustomersController {
 
     @PostMapping(value = "execute", params = "searchCutomer")
     public String searchCutomer(Model model) {
-        // execute service
-        ResultDTO<Customer> dto = custService.selectAll();
-
-        // set result
-        model.addAttribute("list", dto.getList());
-
         return "customers";
     }
 
     @PostMapping(value = "execute", params = "addCustomer")
-    public String addCustomer(Model model) {
+    // public String addCustomer(@ModelAttribute("form") form, BindingResult br, Model model) {
+    public String addCustomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
+        // TODO err
+        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        // execute service
+        custService.insertCustomer(custForm);
+
         return "customers";
     }
 
@@ -64,7 +65,13 @@ public class CustomersController {
     }
 
     @PostMapping(value = "execute", params = "deleteCustomer")
-    public String deleteCustomer(Model model) {
+    public String deleteCustomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
+        // TODO err
+        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        // 誤操作防止のためにコメントアウトしときましょ
+        // execute service
+        // custService.deleteCustomer(custForm);
+
         return "customers";
     }
 }

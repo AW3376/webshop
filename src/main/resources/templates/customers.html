@@ -18,7 +18,7 @@
     <table id="formTable">
     <tr>
         <th><label for="number">Number</label></th>
-        <td><p th:text="*{number}"></p></td>
+        <td><input type="text" th:field="*{number}" th:readonly="true"></td>
     </tr>
     <tr>
         <th><label for="id">ID</label></th>
@@ -49,7 +49,8 @@
         <th><input type="submit" name="showAllCustomer" value="全件表示"></th>
         <th><input type="submit" name="searchCutomer" value="検索"></th>
         <th><input type="submit" name="addCustomer" value="追加"></th>
-        <th><input type="submit" name="editCustomer" value="変更実行"></th>    </tr></table>
+        <th><input type="submit" name="editCustomer" value="変更実行"></th>
+    </tr></table>
     </form>
     </div>
 
@@ -65,16 +66,19 @@
         <th></th>
         <th></th>
     </tr>
-    <tr th:if="${list}!=null" th:each="cust : ${list}">
-        <td><p th:text="${cust.number}"></p></td>
-        <td><p th:text="${cust.id}"></p></td>
-        <td><p th:text="${cust.password}"></p></td>
-        <td><p th:text="${cust.name}"></p></td>
-        <td><p th:text="${cust.prefecture}"></p></td>
-        <td><p th:text="${cust.city}"></p></td>
-        <td><p th:text="${cust.phone}"></p></td>
+    <tr th:if="${list}!=null" th:each="cust, itr : ${list}">
+    <!-- <form action="#" th:action="@{/customers/execute}" th:object="${list[itr.index]}" method="POST" th:readonly="true"> -->
+    <form action="#" th:action="@{/customers/execute}" th:object="${cust}" method="POST">
+        <td><input type="text" name="number" th:value="${cust.number}" th:readonly="true"/></td>
+        <td><input type="text" name="id" th:value="${cust.id}" th:readonly="true"/></td>
+        <td><input type="text" name="password" th:value="${cust.password}" th:readonly="true"/></td>
+        <td><input type="text" name="name" th:value="${cust.name}" th:readonly="true"/></td>
+        <td><input type="text" name="prefecture" th:value="${cust.prefecture}" th:readonly="true"/></td>
+        <td><input type="text" name="city" th:value="${cust.city}" th:readonly="true"/></td>
+        <td><input type="text" name="phone" th:value="${cust.phone}" th:readonly="true"/></td>
         <td class="buttonTd"><input type="submit" name="editCustomer" value="変更"></td>
         <td class="buttonTd"><input type="submit" name="deleteCustomer" value="削除"></td>
+    </form>
     </tr>
     </table>
 </div>

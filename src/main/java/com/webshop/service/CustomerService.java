@@ -2,10 +2,11 @@ package com.webshop.service;
 
 import com.webshop.dto.ResultDTO;
 import com.webshop.entity.Customer;
+import com.webshop.form.CustomerForm;
 
 public interface CustomerService {
 	public ResultDTO<Customer> selectAll();
-	// public ResultDTO<Customer> insertOne();
+	public void insertCustomer(CustomerForm custForm);
 	// public ResultDTO<Customer> updateOne();
-	// public ResultDTO<Customer> deleteOne();
+	public void deleteCustomer(CustomerForm custForm);
 }

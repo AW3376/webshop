@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 // import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.util.StringUtils;
 
 import com.webshop.dao.CustomerDAO;
 import com.webshop.entity.Customer;
@@ -38,9 +39,27 @@ public class CustomerDAOImple implements CustomerDAO {
     }
 
     @Override
-    public void insertOne(Customer cust) {
-        // TODO Auto-generated method stub
-
+    public void insertCustomer(Customer cust) {
+        int result;
+        if(StringUtils.isEmpty(cust.getPhone())) {
+            result = jdbcTemplate.update("INSERT INTO customers" +
+                        "(id, password, name, prefecture, city) VALUES (?, ?, ?, ?, ?)",
+                        cust.getId(),
+                        cust.getPassword(),
+                        cust.getName(),
+                        cust.getPrefecture(),
+                        cust.getCity());
+        } else {
+            result = jdbcTemplate.update("INSERT INTO customers" +
+                        "(id, password, name, prefecture, city, phone) VALUES (?, ?, ?, ?, ?, ?)",
+                        cust.getId(),
+                        cust.getPassword(),
+                        cust.getName(),
+                        cust.getPrefecture(),
+                        cust.getCity(),
+                        cust.getPhone());
+        }
+        System.out.println("result = " + result);
     }
 
     @Override
@@ -56,8 +75,9 @@ public class CustomerDAOImple implements CustomerDAO {
     }
 
     @Override
-    public void deleteOne(String id) {
-        // TODO Auto-generated method stub
-
+    public void deleteCustomer(int num) {
+        int result;
+        result = jdbcTemplate.update("DELETE FROM customers WHERE number = ?", num);
+        System.out.println("result = " + result);
     }
 }
