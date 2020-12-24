@@ -59,8 +59,24 @@ public class CustomersController {
         return "customers";
     }
 
+    @PostMapping(value = "execute", params = "setCustomerForm")
+    public String setCustomerForm(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
+        // TODO err
+        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+
+        model.addAttribute("form", custForm);
+
+        return "customers";
+    }
+
     @PostMapping(value = "execute", params = "editCustomer")
-    public String editCustomer(Model model) {
+    public String editCustomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
+        // TODO err
+        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+
+        // execute service
+        custService.updateCustomer(custForm);
+
         return "customers";
     }
 

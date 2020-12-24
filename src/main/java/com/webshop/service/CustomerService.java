@@ -7,6 +7,6 @@ import com.webshop.form.CustomerForm;
 public interface CustomerService {
 	public ResultDTO<Customer> selectAll();
 	public void insertCustomer(CustomerForm custForm);
-	// public ResultDTO<Customer> updateOne();
+	public void updateCustomer(CustomerForm custForm);
 	public void deleteCustomer(CustomerForm custForm);
 }

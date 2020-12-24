@@ -41,7 +41,7 @@ public class CustomerDAOImple implements CustomerDAO {
     @Override
     public void insertCustomer(Customer cust) {
         int result;
-        if(StringUtils.isEmpty(cust.getPhone())) {
+        if(StringUtils.hasText(cust.getPhone())) {
             result = jdbcTemplate.update("INSERT INTO customers" +
                         "(id, password, name, prefecture, city) VALUES (?, ?, ?, ?, ?)",
                         cust.getId(),
@@ -69,10 +69,68 @@ public class CustomerDAOImple implements CustomerDAO {
     }
 
     @Override
-    public void updateOne(Customer cust) {
-        // TODO Auto-generated method stub
+    public void updateCustomer(Customer cust) {
+        int result;
 
+        //SQL作成
+        StringBuilder sql = new StringBuilder();
+        String sqlBase = "update customers set ";
+        sql.append(sqlBase);
+
+        // id
+        if (StringUtils.hasText(cust.getId())) {
+            sql.append("id = \"" + cust.getId() + "\"");
+        }
+        // password
+        if (StringUtils.hasText(cust.getPassword())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(", ");
+            }
+            sql.append("password = \"" + cust.getPassword() + "\"");
+        }
+        // name
+        if (StringUtils.hasText(cust.getName())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(", ");
+            }
+            sql.append("password = \"" + cust.getPassword() + "\"");
+        }
+        // prefecture
+        if (StringUtils.hasText(cust.getPrefecture())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(", ");
+            }
+            sql.append("prefecture = \"" + cust.getPrefecture() + "\"");
+        }
+        // city
+        if (StringUtils.hasText(cust.getCity())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(", ");
+            }
+            sql.append("city = \"" + cust.getCity() + "\"");
+        }
+        // phone
+        if (StringUtils.hasText(cust.getPhone())) {
+            if (isNeededConjunction(sql)) {
+                sql.append(", ");
+            }
+            sql.append("phone = \"" + cust.getPhone() + "\"");
+        }
+
+        // 変更箇所がなければ変更しない
+        if(sql.toString().equals(sqlBase)) {
+            // customerList.add(new Customer());
+        }
+
+        sql.append("where number = " + cust.getNumber());
+
+        System.out.println("sssssssssssssssssssssssssssssssssssssssss");
+        System.out.println(sql.toString());
+
+        result = jdbcTemplate.update(sql.toString());
+        System.out.println("result = " + result);
     }
+
 
     @Override
     public void deleteCustomer(int num) {
@@ -80,4 +138,14 @@ public class CustomerDAOImple implements CustomerDAO {
         result = jdbcTemplate.update("DELETE FROM customers WHERE number = ?", num);
         System.out.println("result = " + result);
     }
+
+    // SQL作成の際に末尾が空白じゃなければ接続詞が必要
+    public boolean isNeededConjunction(StringBuilder sb) {
+        if(!Character.isWhitespace(sb.charAt(sb.length() - 1))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

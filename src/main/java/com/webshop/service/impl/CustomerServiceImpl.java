@@ -45,9 +45,6 @@ public class CustomerServiceImpl implements CustomerService {
     public ResultDTO<Customer> selectCutomers() {
         ResultDTO<Customer> rs = new ResultDTO<>();
 
-		List<Customer> list = dao.selectAll();
-		rs.setList(list);
-
 		return rs;
     }
 
@@ -59,8 +56,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     // UPDATE
-    public void updateOne(CustomerForm custForm) {
-        // TODO
+    public void updateCustomer(CustomerForm custForm) {
+        Customer customer = custForm.toEntity();
+
+        dao.updateCustomer(customer);
     }
 
     // DELETE

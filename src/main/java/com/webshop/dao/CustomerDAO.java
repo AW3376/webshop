@@ -8,6 +8,6 @@ public interface CustomerDAO {
     public List<Customer> selectAll();
     public void insertCustomer(Customer cust);
     public Customer selectCustomers(String id);
-    public void updateOne(Customer cust);
+    public void updateCustomer(Customer cust);
     public void deleteCustomer(int num);
 }
