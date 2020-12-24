@@ -13,6 +13,18 @@ public class CustomerForm {
     private String city;
     private String phone;
 
+    public Customer toEntity(){
+        Customer cust = new Customer();
+        cust.setNumber(this.number);
+        cust.setId(this.id);
+        cust.setPassword(this.password);
+        cust.setName(this.name);
+        cust.setPrefecture(this.prefecture);
+        cust.setCity(this.city);
+        cust.setPhone(this.phone);
+        return cust;
+    }
+
     @Override
     public String toString() {
         return "{" +

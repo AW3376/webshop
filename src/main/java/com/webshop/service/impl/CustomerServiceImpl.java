@@ -39,4 +39,44 @@ public class CustomerServiceImpl implements CustomerService {
 
 		return rs;
     }
+
+    public ResultDTO<Customer> selectCutomers() {
+        ResultDTO<Customer> rs = new ResultDTO<>();
+
+		// SELECT 複数
+		List<Customer> list = dao.selectAll();
+		rs.setList(list);
+
+		return rs;
+    }
+
+    public ResultDTO<Customer> insertOne() {
+        ResultDTO<Customer> rs = new ResultDTO<>();
+
+		// SELECT 複数
+		List<Customer> list = dao.selectAll();
+		rs.setList(list);
+
+		return rs;
+    }
+
+    public ResultDTO<Customer> updateOne() {
+        ResultDTO<Customer> rs = new ResultDTO<>();
+
+		// SELECT 複数
+		List<Customer> list = dao.selectAll();
+		rs.setList(list);
+
+		return rs;
+    }
+
+    public ResultDTO<Customer> deleteOne() {
+        ResultDTO<Customer> rs = new ResultDTO<>();
+
+		// SELECT 複数
+		List<Customer> list = dao.selectAll();
+		rs.setList(list);
+
+		return rs;
+    }
 }

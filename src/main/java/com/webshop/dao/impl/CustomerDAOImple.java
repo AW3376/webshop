@@ -32,7 +32,7 @@ public class CustomerDAOImple implements CustomerDAO {
     @Override
     public List<Customer> selectAll() {
         // 他にRowMapperとMapを使った取得方法があるが、使えるなら以下が一番楽
-        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         List<Customer> customerList = jdbcTemplate.query("SELECT * FROM customers", rowMapper);
         return customerList;
     }
@@ -44,7 +44,7 @@ public class CustomerDAOImple implements CustomerDAO {
     }
 
     @Override
-    public Customer selectOneById(String id) {
+    public Customer selectCustomers(String id) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -56,7 +56,7 @@ public class CustomerDAOImple implements CustomerDAO {
     }
 
     @Override
-    public void deleteOneById(String id) {
+    public void deleteOne(String id) {
         // TODO Auto-generated method stub
 
     }

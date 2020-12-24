@@ -8,7 +8,6 @@ import com.webshop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +39,32 @@ public class CustomersController {
         // set result
         model.addAttribute("list", dto.getList());
 
+        return "customers";
+    }
+
+    @PostMapping(value = "execute", params = "searchCutomer")
+    public String searchCutomer(Model model) {
+        // execute service
+        ResultDTO<Customer> dto = custService.selectAll();
+
+        // set result
+        model.addAttribute("list", dto.getList());
+
+        return "customers";
+    }
+
+    @PostMapping(value = "execute", params = "addCustomer")
+    public String addCustomer(Model model) {
+        return "customers";
+    }
+
+    @PostMapping(value = "execute", params = "editCustomer")
+    public String editCustomer(Model model) {
+        return "customers";
+    }
+
+    @PostMapping(value = "execute", params = "deleteCustomer")
+    public String deleteCustomer(Model model) {
         return "customers";
     }
 }
