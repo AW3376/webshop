@@ -1,0 +1,67 @@
+●customers
+・サンプルデータ
+
+insert into customers (id, password, name, prefecture, city, phone) values("tomjon", "jontom", "Tom Jones", "北海道", "ニセコ", "08014789632");
+insert into customers (id, password, name, prefecture, city, phone) values("samth", "heysmi", "Sam Smith", "大阪", "西成", "070-1212-3434");
+insert into customers (id, password, name, prefecture, city) values("miaoumiaou", "amaou", "猫ひろし", "東京", "八王子");
+insert into customers (id, password, name, prefecture, city, phone) values("hogehoge", "hugahuga", "templater", "tokyo", "asakusa", "090-1234-5678");
+insert into customers (id, password, name, prefecture, city) values("samurai", "fujisan", "sushi", "沖縄", "那覇");
+
+・create文
+
+CREATE TABLE customers(
+  number int NOT NULL primary key AUTO_INCREMENT,
+  id VARCHAR(255) not null,
+  password VARCHAR(255) not null,
+  name VARCHAR(255) not null,
+  prefecture VARCHAR(255) not null,
+  city VARCHAR(255) not null,
+  phone VARCHAR(40),
+  created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_time DATETIME DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+) engine=INNODB default charset utf8;
+
+CREATE UNIQUE INDEX cid_index ON customers (id);
+CREATE UNIQUE INDEX cps_index ON customers (password);
+
+●products
+・サンプルデータ
+
+insert into products (name, sale_price, purchase_price, stock, maker) values("Cat", 50000, 30000, 10, "Heaven");
+insert into products (name, sale_price, purchase_price, stock, maker) values("Dog", 100000, 50000, 15, "Heaven");
+insert into products (name, sale_price, purchase_price, stock, maker) values("Tomato", 100, 30, 100, "GigaFarm");
+insert into products (name, sale_price, purchase_price, stock, maker) values("Onion", 30, 5, 500, "GigaFarm");
+insert into products (name, sale_price, purchase_price, stock, maker) values("Leather Jacket", 10050, 2000, 50, "TokoroBase");
+
+・create文
+
+CREATE TABLE products(
+  id int NOT NULL primary key AUTO_INCREMENT,
+  name VARCHAR(255) not null,
+  sale_price MEDIUMINT not null,
+  purchase_price MEDIUMINT not null,
+  stock SMALLINT not null,
+  maker VARCHAR(255),
+  created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_time DATETIME DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+) engine=INNODB default charset utf8;
+
+●orders
+・サンプルデータ
+
+insert into orders (customer_id, product_id, ammount, order_price, status) values("tomjon", 2, 1, 100000, "受注");
+
+・create文
+
+CREATE TABLE orders(
+  id int NOT NULL primary key AUTO_INCREMENT comment 'primary key',
+  customer_id varchar(255) not null,
+  product_id int not null,
+  ammount SMALLINT NOT NULL,
+  order_price MEDIUMINT not null,
+  status varchar(15),
+  created_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_time DATETIME DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  index cid_index(customer_id), FOREIGN  KEY fk_customer_id(customer_id) REFERENCES customers(id),
+  index pid_index(product_id), FOREIGN  KEY fk_product_id(product_id) REFERENCES products(id)
+) engine=INNODB default charset utf8;
