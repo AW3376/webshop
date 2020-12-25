@@ -17,6 +17,12 @@ public class ProductForm {
 
     private String maker;
 
+    public ProductForm() {
+        this.salePrice = -1;
+        this.purchasePrice = -1;
+        this.stock = -1;
+    }
+
     public Product toEntity() {
         Product prod = new Product();
         prod.setId(this.getId());

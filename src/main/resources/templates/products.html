@@ -7,52 +7,66 @@
 
 <head>
     <title>Products</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/products.css}" />
+    <!-- local プレビュー用 -->
+    <link rel="stylesheet" media="all" href="../static/css/style.css" />
+    <link rel="stylesheet" media="all" href="../static/css/products.css" />
 </head>
 <body>
 <div layout:fragment="content">
-    <form action="#" th:action="@{/products/showOne}" th:object="${form}" method="POST">
-        <table width="300">
-        <tr>
-            <td><label for="id">ProductID : </label></td>
-            <td><input type="number" th:field="*{id}"></td>
-        </tr>
-        <tr>
-            <td><label>Name : </label></td>
-            <td><input type="text" th:field="*{name}"></td>
-        </tr>
-        <tr>
-            <td><label>SalePrice : </label></td>
-            <td><input type="number" th:field="*{salePrice}"></td>
-        </tr>
-        <tr>
-            <td><label>maker : </label></td>
-            <td><input type="text" th:field="*{maker}"></td>
-        </tr>
-        </table><br>
-        <table width="300"><tr>
-        <td><input type="submit" value="検索"></td>
-        <td><input type="submit" value="追加"></td>
-        <td><input type="submit" value="変更"></td>
-        <td><input type="submit" value="削除"></td>
-        </tr></table>
-    </form>
-
-    <table style="margin: 2em" border="1">
+    <div>
+    <form action="#" th:action="@{/products/execute}" th:object="${prodForm}" method="POST">
+    <table id="formTable">
     <tr>
-        <th style="width: 80px; background-color: #CCC;">ProductID</th>
-        <th style="width: 80px; background-color: #CCC;">Name</th>
-        <th style="width: 80px; background-color: #CCC;">SalePrice</th>
-        <th style="width: 80px; background-color: #CCC;">PurPrice</th>
-        <th style="width: 80px; background-color: #CCC;">Stock</th>
-        <th style="width: 80px; background-color: #CCC;">Maker</th>
+        <th><label for="id">ProductID</label></th>
+        <td><input type="text" th:field="*{id}"></td>
     </tr>
-    <tr th:each="prod : ${result}">
-        <td th:text="${prod.id}"></td>
-        <td th:text="${prod.name}"></td>
-        <td th:text="${prod.salePrice}"></td>
-        <td th:text="${prod.purchasePrice}"></td>
-        <td th:text="${prod.stock}"></td>
-        <td th:text="${prod.maker}"></td>
+    <tr>
+        <th><label for="name">Name</label></th>
+        <td><input type="text" th:field="*{name}"></td>
+    </tr>
+    <tr>
+        <th><label for="salePrice">SalePrice</label></th>
+        <td><input type="text" th:field="*{salePrice}"></td>
+    </tr>
+    <tr>
+        <th><label for="maker">Maker</label></th>
+        <td><input type="text" th:field="*{maker}"></td>
+    </tr>
+    </table><br>
+    <table id="buttonTable"><tr>
+        <th><input type="submit" name="searchProducts" value="検索"></th>
+        <!-- 管理者用メニュー -->
+        <!-- <th><input type="submit" name="addProduct" value="追加"></th>
+        <th><input type="submit" name="editProduct" value="変更実行"></th> -->
+    </tr></table>
+    </form>
+    </div>
+
+    <table id="listTable">
+    <tr>
+        <th>ProductID</th>
+        <th>Name</th>
+        <th>SalePrice</th>
+        <!-- 管理者権限でのみ表示 -->
+        <!-- <th>PurchasePrice</th> -->
+        <th>Stock</th>
+        <th>Maker</th>
+        <th></th>
+    </tr>
+    <tr th:if="${list}!=null" th:each="prod, itr : ${list}">
+    <form action="#" th:action="@{/products/execute}" th:object="${prod}" method="POST">
+        <td><input type="text" name="id" th:value="${prod.id}" th:readonly="true"/></td>
+        <td><input type="text" name="name" th:value="${prod.name}" th:readonly="true"/></td>
+        <td><input type="text" name="salePrice" th:value="${prod.salePrice}" th:readonly="true"/></td>
+        <!-- <td><input type="text" name="purchasePrice" th:value="${prod.purchasePrice}" th:readonly="true"/></td> -->
+        <td><input type="text" name="stock" th:value="${prod.stock}" th:readonly="true"/></td>
+        <td><input type="text" name="maker" th:value="${prod.maker}" th:readonly="true"/></td>
+        <td class="buttonTd"><input type="submit" name="setProductForm" value="注文"></td>
+        <!-- 管理者権限でのみ表示 -->
+        <!-- <td class="buttonTd"><input type="submit" name="setProductForm" value="変更"></td>
+        <td class="buttonTd"><input type="submit" name="deleteProduct" value="削除"></td> -->
+    </form>
     </tr>
     </table>
 </div>

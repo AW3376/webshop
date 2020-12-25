@@ -18,12 +18,12 @@ import com.webshop.entity.Customer;
 // DAOクラスに付与するもの。Springのコンポーネントと認識され
 // ApplicationContextに登録されてDI対象のクラスとなる
 @Repository
-public class CustomerDAOImple implements CustomerDAO {
+public class CustomerDAOImpl implements CustomerDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public CustomerDAOImple() {
+    public CustomerDAOImpl() {
         init();
     }
 

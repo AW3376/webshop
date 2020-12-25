@@ -22,7 +22,7 @@ public class CustomersController {
     @Autowired
     private CustomerService custService;
 
-    @ModelAttribute("form")
+    @ModelAttribute("custForm")
     public CustomerForm setUpForm() {
         return new CustomerForm();
     }
