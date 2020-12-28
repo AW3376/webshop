@@ -1,0 +1,42 @@
+th {
+    text-align: center;
+}
+
+#detailTable {
+    border-width: 0.5em;
+    border-style: double;
+    border-color: gray;
+    width: 500px;
+    height: 400px;
+}
+
+#sample {
+    width: 350px;
+    height: 400px;
+}
+
+.ttl {
+    text-align: right;
+    width: 50px;
+}
+
+.ti {
+    width: 50px;
+}
+
+.info {
+    border: none;
+    outline: none;
+    text-align: right;
+    width: 100px;
+}
+
+.ord {
+    text-align: right;
+}
+
+
+
+#num {
+    width: 30px;
+}

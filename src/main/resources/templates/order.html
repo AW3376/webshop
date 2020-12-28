@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+    lang="ja"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout}">
+
+<head>
+    <title>Order</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/order.css}" />
+    <!-- local プレビュー用 -->
+    <!-- <link rel="stylesheet" media="all" href="../static/css/style.css" />
+    <link rel="stylesheet" media="all" href="../static/css/order.css" /> -->
+</head>
+<body>
+<div layout:fragment="content">
+    <table id="detailTable">
+    <tr>
+        <th colspan="3">商品詳細</th>
+    </tr>
+    <tr>
+        <td id="sample" rowspan="6"><img th:src="@{/images/{fileName}.png(fileName=${orderForm.name})}" th:alt="${orderForm.name}"></td><td class="ttl">ProductID </td>      <td class="ti"><input class="info" type="text" name="id" th:value="${orderForm.id}" th:readonly="true"/></td></tr>
+    <tr>                                       <td class="ttl">Name </td>           <td class="ti"><input class="info" type="text" name="name" th:value="${orderForm.name}" th:readonly="true"/></td></tr>
+    <tr>                                       <td class="ttl">salePrice </td>      <td class="ti"><input class="info" type="text" name="salePrice" th:value="${orderForm.salePrice}" th:readonly="true"/></td></tr>
+    <tr>                                       <td class="ttl">Maker </td>          <td class="ti"><input class="info" type="text" name="maker" th:value="${orderForm.maker}" th:readonly="true"/></td></tr>
+    <tr>                                       <td class="ttl">order </td>          <td class="ti ord" th:if="${orderForm.stock} gt 0"><input id="num" name="stock" type="number"/>/<span th:text="${orderForm.stock}"></span></td>
+                                                                                    <td class="ti ord" th:if="${orderForm.stock} le 0"><span th:text="OutOfStock"></span></td></tr>
+    <tr>                                       <td class="ttl"></td>                <td class="ti ord"><input type="submit" name="order" value="注文"/></td></tr>
+    </table>
+</div>
+</body>
+</html>

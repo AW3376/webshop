@@ -34,8 +34,6 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public void insertProduct(Product prod) {
-        System.out.println("iniiiiiiiiiiiiiiiii");
-        System.out.println(prod.toString());
         int result;
         if(StringUtils.hasText(prod.getMaker())) {
             result = jdbcTemplate.update("INSERT INTO products" +
@@ -112,9 +110,6 @@ public class ProductDAOImpl implements ProductDAO {
             productList.add(new Product());
             return productList;
         }
-
-        System.out.println("sqqqqqqqqqqqqqqqqqqqqq");
-        System.out.println(sql.toString());
 
         RowMapper<Product> rowMapper = new BeanPropertyRowMapper<>(Product.class);
         productList = jdbcTemplate.query(sql.toString(), rowMapper);

@@ -18,7 +18,7 @@
     <table id="formTable">
     <tr>
         <th><label for="number">Number</label></th>
-        <td><input type="number" th:field="*{number}" th:readonly="true"></td>
+        <td><input type="number" th:if="*{number}!=0" th:field="*{number}" th:readonly="true"></td>
     </tr>
     <tr>
         <th><label for="id">ID</label></th>
@@ -66,7 +66,7 @@
         <th></th>
         <th></th>
     </tr>
-    <tr th:if="${list}!=null" th:each="cust, itr : ${list}">
+    <tr th:if="${list}!=null" th:each="cust : ${list}">
     <form action="#" th:action="@{/customers/execute}" th:object="${cust}" method="POST">
         <td><input type="text" name="number" th:value="${cust.number}" th:readonly="true"/></td>
         <td><input type="text" name="id" th:value="${cust.id}" th:readonly="true"/></td>

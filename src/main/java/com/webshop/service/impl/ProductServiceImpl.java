@@ -41,8 +41,6 @@ public class ProductServiceImpl implements ProductService {
 
     // SELECT
     public ResultDTO<Product> selectProducts(ProductForm prodForm) {
-        System.out.println("ssssssssssssssssssssss");
-        System.out.println(prodForm.toString());
         Product prod = prodForm.toEntity();
         ResultDTO<Product> rs = new ResultDTO<>();
         rs.setList(dao.selectProducts(prod));

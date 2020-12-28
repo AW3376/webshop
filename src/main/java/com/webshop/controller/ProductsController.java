@@ -34,14 +34,18 @@ public class ProductsController {
 
     @PostMapping(value = "execute", params = "searchProducts")
     public String searchCutomer(@ModelAttribute ProductForm prodForm, BindingResult bs, Model model) {
-        // TODO err
-        System.out.println("contttttttttttttttttt");
-        System.out.println(prodForm.toString());
-        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        if(bs.hasErrors()) { return "products"; }
         // execute service
         ResultDTO<Product> dto = prodService.selectProducts(prodForm);
         model.addAttribute("list", dto.getList());
 
         return "products";
+    }
+
+    @PostMapping(value = "execute", params = "orderForm")
+    public String orderItem(@ModelAttribute ProductForm prodForm, BindingResult bs, Model model) {
+        if(bs.hasErrors()) { return "products"; }
+        model.addAttribute("orderForm", prodForm);
+        return "order";
     }
 }

@@ -45,8 +45,7 @@ public class CustomersController {
 
     @PostMapping(value = "execute", params = "searchCutomer")
     public String searchCutomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
-        // TODO err
-        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        if(bs.hasErrors()) { return "customers"; }
         // execute service
         ResultDTO<Customer> dto = custService.selectCustomers(custForm);
         model.addAttribute("list", dto.getList());
@@ -55,10 +54,8 @@ public class CustomersController {
     }
 
     @PostMapping(value = "execute", params = "addCustomer")
-    // public String addCustomer(@ModelAttribute("form") form, BindingResult br, Model model) {
     public String addCustomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
-        // TODO err
-        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        if(bs.hasErrors()) { return "customers"; }
         // execute service
         custService.insertCustomer(custForm);
 
@@ -67,18 +64,16 @@ public class CustomersController {
 
     @PostMapping(value = "execute", params = "setCustomerForm")
     public String setCustomerForm(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
-        // TODO err
-        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        if(bs.hasErrors()) { return "customers"; }
 
-        model.addAttribute("form", custForm);
+        model.addAttribute("custForm", custForm);
 
         return "customers";
     }
 
     @PostMapping(value = "execute", params = "editCustomer")
     public String editCustomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
-        // TODO err
-        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        if(bs.hasErrors()) { return "customers"; }
 
         // execute service
         custService.updateCustomer(custForm);
@@ -88,8 +83,7 @@ public class CustomersController {
 
     @PostMapping(value = "execute", params = "deleteCustomer")
     public String deleteCustomer(@ModelAttribute CustomerForm custForm, BindingResult bs, Model model) {
-        // TODO err
-        if(bs.hasErrors()) { System.out.println(bs.toString()); }
+        if(bs.hasErrors()) { return "customers"; }
         // 誤操作防止のためにコメントアウトしときましょ
         // execute service
         // custService.deleteCustomer(custForm);

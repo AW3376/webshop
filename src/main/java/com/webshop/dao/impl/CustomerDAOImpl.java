@@ -61,7 +61,6 @@ public class CustomerDAOImpl implements CustomerDAO {
                         cust.getCity(),
                         cust.getPhone());
         }
-        System.out.println("result = " + result);
     }
 
     @Override

@@ -9,8 +9,9 @@
     <title>Products</title>
     <link rel="stylesheet" media="all" th:href="@{/css/products.css}" />
     <!-- local プレビュー用 -->
-    <link rel="stylesheet" media="all" href="../static/css/style.css" />
-    <link rel="stylesheet" media="all" href="../static/css/products.css" />
+    <!-- <link rel="stylesheet" media="all" href="../static/css/style.css" />
+    <link rel="stylesheet" media="all" href="../static/css/products.css" /> --> -->
+
 </head>
 <body>
 <div layout:fragment="content">
@@ -62,7 +63,7 @@
         <!-- <td><input type="text" name="purchasePrice" th:value="${prod.purchasePrice}" th:readonly="true"/></td> -->
         <td><input type="text" name="stock" th:value="${prod.stock}" th:readonly="true"/></td>
         <td><input type="text" name="maker" th:value="${prod.maker}" th:readonly="true"/></td>
-        <td class="buttonTd"><input type="submit" name="setProductForm" value="注文"></td>
+        <td class="buttonTd"><input type="submit" name="orderForm" value="注文"></td>
         <!-- 管理者権限でのみ表示 -->
         <!-- <td class="buttonTd"><input type="submit" name="setProductForm" value="変更"></td>
         <td class="buttonTd"><input type="submit" name="deleteProduct" value="削除"></td> -->
